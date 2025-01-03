@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\KoleksiBukuController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\UserDashboardController;
+use App\Models\CategoryBook;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -17,14 +18,20 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/home', [UserDashboardController::class, 'home'])->name('home');
     Route::get('/detail/{id}', [UserDashboardController::class, 'detail'])->name('detail');
+    Route::post('/pinjam/{id}', [UserDashboardController::class, 'pinjam'])->name('pinjam-buku');
+    Route::get('/history', [UserDashboardController::class, 'history'])->name('history');
+    Route::post('/kembalikan/{id}', [UserDashboardController::class, 'return'])->name('kembalikan-buku');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/profile', [UserDashboardController::class, 'profile'])->name('profile');
+    Route::put('/profile', [UserDashboardController::class, 'updateProfile'])->name('update-profile');
 });
 
 // Admin
 Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('koleksi-buku', KoleksiBukuController::class)->except(['create', 'edit']);
-    Route::resource('users', UsersController::class)->except(['show', 'create', 'edit']);
     Route::resource('category', CategoryController::class)->except(['show', 'create', 'edit']);
+    Route::resource('users', UsersController::class)->except(['show', 'create', 'edit']);
 });
 
 
