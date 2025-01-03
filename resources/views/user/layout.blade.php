@@ -12,7 +12,7 @@
 
     {{-- Production --}}
     <link rel="stylesheet" href="{{asset('build/assets/app-5NZ0x0VH.css')}}">
-    <script type="module" src="{{asset('build/assets/app-5NZ0x0VH.js')}}" defer></script>
+    <script type="module" src="{{asset('build/assets/app-DEdkgso6.js')}}" defer></script>
 
     {{-- FontAwosome CDN --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"

@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\KoleksiBukuController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\AuthController;
-
 use App\Http\Controllers\User\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,12 +16,13 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [UserDashboardController::class, 'home'])->name('home');
-    
+    Route::get('/detail/{id}', [UserDashboardController::class, 'detail'])->name('detail');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 // Admin
 Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('koleksi-buku', KoleksiBukuController::class)->except(['create', 'edit']);
     Route::resource('users', UsersController::class)->except(['show', 'create', 'edit']);
     Route::resource('category', CategoryController::class)->except(['show', 'create', 'edit']);
 });
